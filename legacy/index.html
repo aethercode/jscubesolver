@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <title>YAHCS</title>
+</head>
+<body>
+    <div class="container-fluid bg-danger m-0 p-3">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-light">YAHCS <small>(Yet Another Horrible Cube Solver)</small></h1>
+            </div>
+            <div class="col text-right">
+                <button type="button" class="btn btn-light" onclick="reset()">reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-light shadow m-0 p-3 text-monospace" id="debug">
+        <p class="m-1">{{ cornerstates }}</p>
+        <p class="m-1">{{ edgestates }}</p>
+        <p class="m-1">todo:
+            <ul>
+                <li>make cube it's own file+make version with output and without</li>
+                <li>use getter functions</li>
+                <li>LEARN TEMPLATE STRINGS</li>
+                <li>beautify js</li>
+                <li>use single instead of double quotes for strings</li>
+                <li>slice moves (oh god)</li>
+                <li>make a class that helps with generating a cube</li>
+            </ul>
+        </p>
+    </div>
+    <div class="container-fluid p-3">
+        <div class="row">
+            <div class="col">
+                <div id="out">
+                    <div v-for="line in output" v-bind:class="line.color">
+                        {{ line.text }}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container" id="buttons">
+                    <div>
+                        <button type="button" class="btn btn-outline-danger m-1" v-for="move in moves" v-on:click="tres.movesafe(move.move)">{{ move.move }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="cube.js"></script>
+</body>
+</html>

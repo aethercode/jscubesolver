@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/custom.css">
+
+    <title>YAHCS</title>
+</head>
+<body>
+    <div class="container-fluid fixed-top p-0" id='topBar' v-if="shown">
+        <div class="container-fluid bg-dark m-0 p-1">
+            <h1 class="text-light font-weight-light m-0">YAHCS
+                <span class="font-weight-light h6">(Yet Another Horrible Cube Solver) </span>v0.1
+            </h1>
+        </div>
+        <div class="container-fluid bg-light p-0">
+            <div class="text-monospace bg-info text-light" v-if="debugShown">
+                <p class="m-0 p-1">{{ debugCornerStates }}</p>
+                <p class="m-0 p-1">{{ debugEdgeStates }}</p>
+                <p class="m-0 p-1">{{ debugCenterStates }}</p>
+            </div>
+            <div class="shadow-sm row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-dark ml-2 my-2" v-for="move in buttons.moves" v-on:click="moveSafe(move)">{{ move }}</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-dark ml-2 my-2" v-for="move in buttons.primeMoves" v-on:click="moveSafe(move)">{{ move }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="topSpacer" :style='{marginTop: height+"px"}'></div>
+    <div id="out" class="container-fluid p-3" v-if="output[0]">
+        <div v-for="line in output" v-bind:class="line.color">
+            {{ line.text }}
+        </div>
+    </div>
+    <div id="bottomSpacer" :style='{marginTop: height+"px"}'></div>
+    <div class="container-fluid p-0 fixed-bottom" id='bottomBar'>
+        <div id='commands'>
+            <input ref="commandInput" v-model="command" v-on:keydown.up='fillLastCommand' v-on:keydown.enter='run' class="form-control bg-dark border-0 rounded-0 text-light" type="text" placeholder="type commands here">
+        </div>
+    </div>
+    <!--div class="container-fluid bg-dark text-light p-3">
+        todo:
+        <small>
+            <ul>
+                <li>fix debug and add centers</li>
+                <li>beautify js</li>
+                <li>make a class that helps with generating a cube</li>
+                <li>make cube more customizable (not just edges and corners)</li>
+                <li>exportState and importState functions (using JSON)</li>
+            </ul>
+        </small>
+    </div-->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="scripts/cube.js"></script>
+    <script src="scripts/definitions.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
